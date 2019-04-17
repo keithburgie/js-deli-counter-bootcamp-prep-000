@@ -1,27 +1,27 @@
-var theDeli = [];
-var ticketNumber = 0;
-
-function takeANumber(i) {
-  ticketNumber++;
-  i.push(ticketNumber);
-  console.log(`Your ticket number is ${ticketNumber}`);
-  return `Your ticket number is ${ticketNumber}`;
+function takeANumber(currentLine, customer) {
+  currentLine.push(customer);
+  return `Welcome, ${customer}. You are number ${currentLine.length} in line.`;
 }
 
-function nowServing(i) {
-  if (i.length === 0) {
+function nowServing(deliLine) {
+  if (deliLine.length === 0) {
     return "There is nobody waiting to be served!";
   } else {
-    let nextCustomer = i.shift();
-    console.log(`Currently serving number ${nextCustomer}.`);
-    return `Currently serving number ${nextCustomer}.`;
+    let nextCustomer = deliLine[0];
+    deliLine.shift();
+    return `Currently serving ${nextCustomer}.`;
   }
 }
 
-function resetTickets() {
-  ticketNumber = 0;
+function currentLine(deliLine) {
+  if (deliLine.length === 0) {
+    return "The line is currently empty.";
+  } else {
+    let customers = [];
+    for (let i = 0; i < deliLine.length; i++) {
+      let customer = `${i+1}. ${deliLine[i]}`;
+      customers.push(customer);
+    }
+    return `The line is currently: ${customers.join(', ')}`;
+  }
 }
-
-takeANumber(theDeli);
-nowServing(theDeli);
-
